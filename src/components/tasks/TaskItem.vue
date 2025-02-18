@@ -1,18 +1,27 @@
 <script setup>
 import { defineProps, ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
 const store = useStore()
 
 const isLoading = ref(false)
+const router = useRouter()
 
 const props = defineProps(['title', 'description', 'id', 'status'])
 
 const removeTask = (id) => {
   isLoading.value = true
-  store.dispatch('tasks/removeTask', id).then(() => {
-    isLoading.value = false
-  })
+  store
+    .dispatch('tasks/removeTask', id)
+    .then(() => {
+      isLoading.value = false
+    })
+    .catch((error) => {
+      isLoading.value = false
+      console.error('Error fetching tasks:', error)
+      router.push({ name: 'login', query: { expired: true } })
+    })
 }
 
 const formData = reactive({
@@ -40,9 +49,16 @@ const updateTask = () => {
     return
   }
   isLoading.value = true
-  store.dispatch('tasks/updateTask', formData).then(() => {
-    isLoading.value = false
-  })
+  store
+    .dispatch('tasks/updateTask', formData)
+    .then(() => {
+      isLoading.value = false
+    })
+    .catch((error) => {
+      isLoading.value = false
+      console.error('Error fetching tasks:', error)
+      router.push({ name: 'login', query: { expired: true } })
+    })
 }
 </script>
 

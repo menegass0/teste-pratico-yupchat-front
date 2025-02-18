@@ -1,16 +1,25 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 const store = useStore()
 
 const isLoading = ref(false)
+const router = useRouter()
 
 const handleSubmit = (event) => {
   isLoading.value = true
   event.preventDefault()
-  store.dispatch('tasks/addTask', event.target).then(() => {
-    isLoading.value = false
-  })
+  store
+    .dispatch('tasks/addTask', event.target)
+    .then(() => {
+      isLoading.value = false
+    })
+    .catch((error) => {
+      isLoading.value = false
+      console.error('Error fetching tasks:', error)
+      router.push({ name: 'login', query: { expired: true } })
+    })
 }
 </script>
 

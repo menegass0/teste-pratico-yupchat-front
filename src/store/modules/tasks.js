@@ -26,116 +26,108 @@ const actions = {
     console.log('teste')
   },
 
-  async fetchTasks({ commit }) {
-    await fetch('http://127.0.0.1:8000/api/tasks', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('user_token')}`,
-      },
+  fetchTasks({ commit }) {
+    return new Promise((resolve, reject) => {
+      fetch('http://127.0.0.1:8000/api/tasks', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('user_token')}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            commit('SET_TASKS', data.data)
+            console.log(data.data)
+            resolve()
+          } else {
+            reject(new Error(data.message))
+          }
+        })
+        .catch((error) => {
+          reject(new Error(error))
+        })
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          commit('SET_TASKS', data.data)
-          console.log(data.data)
-        } else {
-          reject(new Error(data.message))
-        }
-      })
-      .catch((error) => {
-        reject(new Error(data.message))
-      })
   },
 
-  async addTask({ commit }, form) {
+  addTask({ commit }, form) {
     const formData = new FormData(form)
 
-    await fetch('http://127.0.0.1:8000/api/tasks', {
-      method: 'POST',
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('user_token')}`, // Add the Bearer token here
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        form.reset()
-        if (data.success) {
-          commit('ADD_TASK', data.data)
-        } else {
-          throw new Error('Usuário não Autenticado')
-        }
+    return new Promise((resolve, reject) => {
+      fetch('http://127.0.0.1:8000/api/tasks', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('user_token')}`, // Add the Bearer token here
+        },
       })
+        .then((response) => response.json())
+        .then((data) => {
+          form.reset()
+          if (data.success) {
+            commit('ADD_TASK', data.data)
+            resolve()
+          } else {
+            reject(new Error(data.message))
+          }
+        })
+    })
   },
 
-  async removeTask({ commit }, taskId) {
-    await fetch(`http://127.0.0.1:8000/api/tasks/${taskId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${localStorage.getItem('user_token')}`,
-      },
+  removeTask({ commit }, taskId) {
+    return new Promise(async (resolve, reject) => {
+      fetch(`http://127.0.0.1:8000/api/tasks/${taskId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('user_token')}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            commit('REMOVE_TASK', taskId)
+            resolve()
+          } else {
+            reject(new Error(data.message))
+          }
+        })
+        .catch((error) => {
+          reject(new Error(error))
+        })
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          commit('REMOVE_TASK', taskId)
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error)
-      })
   },
 
-  async updateTask({ commit }, data) {
-    const formData = new URLSearchParams()
+  updateTask({ commit }, data) {
+    return new Promise(async (resolve, reject) => {
+      const formData = new URLSearchParams()
 
-    for (const key in data) {
-      formData.append(key, data[key])
-    }
+      for (const key in data) {
+        formData.append(key, data[key])
+      }
 
-    await fetch(`http://127.0.0.1:8000/api/tasks/${data.id}`, {
-      method: 'PUT',
-      body: formData,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        Authorization: `Bearer ${localStorage.getItem('user_token')}`,
-      },
+      fetch(`http://127.0.0.1:8000/api/tasks/${data.id}`, {
+        method: 'PUT',
+        body: formData,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Authorization: `Bearer ${localStorage.getItem('user_token')}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('res', data.data)
+          if (data.success) {
+            commit('UPDATE_TASK', data.data)
+            resolve()
+          } else {
+            reject(new Error(data.message))
+          }
+        })
+        .catch((error) => {
+          reject(new Error(error))
+        })
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('res', data.data)
-        if (data.success) {
-          commit('UPDATE_TASK', data.data)
-        } else {
-          console.error('Failed to update task')
-        }
-      })
-      .catch((error) => {
-        console.error('Error:', error)
-      })
   },
-
-  // updateTask ({commit}, id, formData)  {
-  //     fetch(`http://127.0.0.1:8000/api/tasks/${id}`, {
-  //       method: 'PUT',
-  //       body: formData,
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': `Bearer ${localStorage.getItem('user_token')}`,
-  //       },
-  //     })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       if (data.success) {
-  //         commit('UPDATE_TASK', data.data)
-  //       } else {
-  //         console.error('Failed to update task');
-  //       }
-  //     })
-  //     .catch(error => {
-  //       console.error('Error:', error);
-  //     });
-  //   };
 }
 
 const getters = {
