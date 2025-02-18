@@ -22,7 +22,23 @@ const formData = reactive({
   status: props.status,
 })
 
+const formInvalid = ref({
+  title: false,
+  description: false,
+  status: false,
+})
+
+const validateForm = () => {
+  formInvalid.value.title = !formData.title
+  formInvalid.value.description = !formData.description
+
+  return !(formInvalid.value.title || formInvalid.value.description)
+}
+
 const updateTask = () => {
+  if (!validateForm()) {
+    return
+  }
   isLoading.value = true
   store.dispatch('tasks/updateTask', formData).then(() => {
     isLoading.value = false
@@ -41,8 +57,9 @@ const updateTask = () => {
           @focusout="updateTask()"
           v-model="formData.title"
           :disabled="isLoading"
-          placeholder="Título da Tarefa"
+          :class="{ 'is-invalid': formInvalid.title }"
         />
+        <div v-if="formInvalid.title" class="invalid-feedback">Título é obrigatório.</div>
       </div>
 
       <div class="col-md-4 order-3 order-md-2">
@@ -76,8 +93,9 @@ const updateTask = () => {
           @focusout="updateTask(id)"
           v-model="formData.description"
           :disabled="isLoading"
-          placeholder="Descrição da Tarefa"
+          :class="{ 'is-invalid': formInvalid.description }"
         ></textarea>
+        <div v-if="formInvalid.description" class="invalid-feedback">Descrição é obrigatória.</div>
       </div>
     </form>
   </div>

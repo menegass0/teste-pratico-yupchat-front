@@ -17,9 +17,10 @@ onMounted(() => {
     .then(() => {
       isLoading.value = false
     })
-    .catch(() => {
+    .catch((error) => {
       isLoading.value = false
-      router.push('/login')
+      console.error('Error fetching tasks:', error)
+      router.push({ name: 'login', query: { expired: true } })
     })
 })
 </script>

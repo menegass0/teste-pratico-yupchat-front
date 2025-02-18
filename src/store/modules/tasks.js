@@ -42,7 +42,7 @@ const actions = {
         }
       })
       .catch((error) => {
-        reject(error)
+        reject(new Error(data.message))
       })
   },
 
