@@ -13,6 +13,12 @@ const mutations = {
   REMOVE_TASK(state, taskId) {
     state.tasks = state.tasks.filter((task) => task.id !== taskId)
   },
+  UPDATE_TASK(state, updatedTask) {
+    const index = state.tasks.findIndex((task) => task.id === updatedTask.id)
+    if (index !== -1) {
+      state.tasks[index] = updatedTask
+    }
+  },
 }
 
 const actions = {
@@ -79,6 +85,57 @@ const actions = {
         console.error('Error:', error)
       })
   },
+
+  async updateTask({ commit }, data) {
+    const formData = new URLSearchParams()
+
+    for (const key in data) {
+      formData.append(key, data[key])
+    }
+
+    await fetch(`http://127.0.0.1:8000/api/tasks/${data.id}`, {
+      method: 'PUT',
+      body: formData,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: `Bearer ${localStorage.getItem('user_token')}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('res', data.data)
+        if (data.success) {
+          commit('UPDATE_TASK', data.data)
+        } else {
+          console.error('Failed to update task')
+        }
+      })
+      .catch((error) => {
+        console.error('Error:', error)
+      })
+  },
+
+  // updateTask ({commit}, id, formData)  {
+  //     fetch(`http://127.0.0.1:8000/api/tasks/${id}`, {
+  //       method: 'PUT',
+  //       body: formData,
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${localStorage.getItem('user_token')}`,
+  //       },
+  //     })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       if (data.success) {
+  //         commit('UPDATE_TASK', data.data)
+  //       } else {
+  //         console.error('Failed to update task');
+  //       }
+  //     })
+  //     .catch(error => {
+  //       console.error('Error:', error);
+  //     });
+  //   };
 }
 
 const getters = {

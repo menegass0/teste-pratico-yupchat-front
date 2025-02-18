@@ -6,9 +6,5 @@ export default createStore({
   modules: {
     tasks,
   },
-  actions: {
-    teste({ commit }) {
-      console.log('aaaaaaaaaaaaaaaaaaaaaa')
-    },
-  },
+  actions: {},
 })
