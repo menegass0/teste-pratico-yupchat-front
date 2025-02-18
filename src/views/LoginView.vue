@@ -1,6 +1,9 @@
 <script setup>
 import { ref } from 'vue'
 import Login from '../components/form/Login.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const errorMessage = ref('')
 
@@ -16,6 +19,7 @@ const handleSubmit = async (event) => {
     .then((data) => {
       if (data.success) {
         localStorage.setItem('user_token', data.data.original.access_token)
+        router.push('/')
       } else {
         errorMessage.value = data.message
       }
@@ -23,7 +27,6 @@ const handleSubmit = async (event) => {
 }
 
 const dismissAlert = () => {
-  console.log('qaaaaaaaaa')
   errorMessage.value = ''
 }
 </script>

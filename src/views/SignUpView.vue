@@ -2,6 +2,10 @@
 import SignUp from '@/components/form/SignUp.vue'
 import { ref } from 'vue'
 
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
 const errorMessage = ref('')
 
 const handleSubmit = async (event) => {
@@ -16,6 +20,7 @@ const handleSubmit = async (event) => {
     .then((data) => {
       if (data.success) {
         console.log(data.message)
+        router.push('/login')
       } else {
         errorMessage.value = data.message
       }
@@ -23,7 +28,6 @@ const handleSubmit = async (event) => {
 }
 
 const dismissAlert = () => {
-  console.log('qaaaaaaaaa')
   errorMessage.value = ''
 }
 </script>
