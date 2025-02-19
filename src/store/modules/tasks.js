@@ -115,9 +115,9 @@ const actions = {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log('res', data.data)
+          console.log('res', data.data[0])
           if (data.success) {
-            commit('UPDATE_TASK', data.data)
+            commit('UPDATE_TASK', data.data[0])
             resolve()
           } else {
             reject(new Error(data.message))
