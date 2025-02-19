@@ -39,7 +39,10 @@ const dismissAlert = () => {
 </script>
 
 <template>
-  <main>
+  <main class="main-center">
     <Login :handleSubmit :errorMessage @dismissAlert="dismissAlert" />
   </main>
 </template>
+
+<style>
+</style>

@@ -27,11 +27,13 @@ onMounted(() => {
 
 <template>
   <main>
-    <Tasks v-if="!isLoading" :tasks />
-    <div v-else class="d-flex flex-column justify-content-center align-items-start">
-      <div class="spinner-border text-light" role="status"></div>
-    </div>
+    <Tasks :isLoading :tasks />
   </main>
 </template>
 
-<style scoped></style>
+<style >
+  main{
+    height: 100vh;
+  }
+
+</style>
