@@ -8,6 +8,16 @@ const isLoading = ref(false)
 const router = useRouter()
 
 const handleSubmit = (event) => {
+  if (!event.target.checkValidity()) {
+    event.preventDefault()
+    event.stopPropagation()
+
+    event.target.classList.add('was-validated')
+    return
+  }
+
+  event.target.classList.remove('was-validated')
+
   isLoading.value = true
   event.preventDefault()
   store
@@ -26,7 +36,7 @@ const handleSubmit = (event) => {
 <template>
   <div class="card">
     <div class="card-body">
-      <form class="row align-items-center gy-2" @submit="handleSubmit">
+      <form class="row align-items-start gy-2 needs-validation" novalidate @submit="handleSubmit">
         <div class="col-md-8 order-1">
           <input
             type="text"
@@ -36,6 +46,7 @@ const handleSubmit = (event) => {
             placeholder="Título da Tarefa"
             required
           />
+          <div class="invalid-feedback">O Campo de Título é Obrigatório..</div>
         </div>
 
         <div class="col-md-4 order-3 order-md-2">
@@ -64,6 +75,7 @@ const handleSubmit = (event) => {
             placeholder="Descrição da Tarefa"
             required
           ></textarea>
+          <div class="invalid-feedback">O Campo de Descrição é Obrigatório.</div>
         </div>
       </form>
     </div>
