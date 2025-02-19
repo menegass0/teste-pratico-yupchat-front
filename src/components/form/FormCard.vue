@@ -15,7 +15,7 @@ export default {
     <div class="card-body d-flex gap-3 flex-column justify-content-center">
       <h1 class="text-center">{{ title }}</h1>
       <div v-if="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
-        {{ errorMessage }}
+        <p class="error-message mb-0">{{ errorMessage }}</p>
         <button
           type="button"
           class="btn btn-close"
