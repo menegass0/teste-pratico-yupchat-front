@@ -7,6 +7,7 @@ const route = useRoute()
 const router = useRouter()
 
 const errorMessage = ref('')
+const isLoading = ref(false)
 
 onMounted(() => {
   if (route.query.expired) {
@@ -16,6 +17,7 @@ onMounted(() => {
 
 const handleSubmit = async (event) => {
   event.preventDefault()
+  isLoading.value = true
   const formData = new FormData(event.target)
 
   fetch('http://127.0.0.1:8000/api/login', {
@@ -28,6 +30,7 @@ const handleSubmit = async (event) => {
         localStorage.setItem('user_token', data.data.original.access_token)
         router.push('/')
       } else {
+        isLoading.value = false
         errorMessage.value = data.message
       }
     })
@@ -40,9 +43,8 @@ const dismissAlert = () => {
 
 <template>
   <main class="main-center">
-    <Login :handleSubmit :errorMessage @dismissAlert="dismissAlert" />
+    <Login :handleSubmit :errorMessage @dismissAlert="dismissAlert" :isLoading />
   </main>
 </template>
 
-<style>
-</style>
+<style></style>

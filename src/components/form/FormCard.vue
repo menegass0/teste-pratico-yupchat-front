@@ -1,6 +1,6 @@
 <script>
 export default {
-  props: ['title', 'action', 'handleSubmit', 'errorMessage'],
+  props: ['title', 'action', 'handleSubmit', 'errorMessage', 'isLoading'],
 
   methods: {
     dismissAlert() {
@@ -25,7 +25,10 @@ export default {
       </div>
       <form class="d-flex flex-column gap-3" @submit="handleSubmit">
         <slot name="form"> </slot>
-        <button class="btn btn-primary">{{ action }}</button>
+        <button v-if="!isLoading" class="btn btn-primary">{{ action }}</button>
+        <button v-else class="btn btn-primary" type="button" disabled>
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        </button>
       </form>
       <slot name="extra"></slot>
     </div>

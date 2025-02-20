@@ -3,7 +3,7 @@ import InputGroup from './InputGroup.vue'
 import FormCard from './FormCard.vue'
 import { RouterLink } from 'vue-router'
 
-const props = defineProps(['handleSubmit', 'errorMessage'])
+const props = defineProps(['handleSubmit', 'errorMessage', 'isLoading'])
 </script>
 
 <template>
@@ -12,6 +12,7 @@ const props = defineProps(['handleSubmit', 'errorMessage'])
     action="Cadastre-se"
     :handleSubmit
     :errorMessage
+    :isLoading
     @dismissAlert="$emit('dismissAlert')"
   >
     <template #form>

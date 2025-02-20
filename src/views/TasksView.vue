@@ -12,6 +12,9 @@ const isLoading = ref(true)
 const tasks = computed(() => store.getters['tasks/allTasks'])
 
 onMounted(() => {
+  if (!localStorage.getItem('user_token')) {
+    router.push({ name: 'login' })
+  }
   store
     .dispatch('tasks/fetchTasks')
     .then(() => {
@@ -19,8 +22,8 @@ onMounted(() => {
     })
     .catch((error) => {
       isLoading.value = false
-      console.error('Error fetching tasks:', error)
       router.push({ name: 'login', query: { expired: true } })
+      console.error('Error fetching tasks:', error)
     })
 })
 </script>
@@ -31,9 +34,8 @@ onMounted(() => {
   </main>
 </template>
 
-<style >
-  main{
-    height: 100vh;
-  }
-
+<style>
+main {
+  height: 100vh;
+}
 </style>

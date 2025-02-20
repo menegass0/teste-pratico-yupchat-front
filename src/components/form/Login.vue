@@ -4,7 +4,7 @@ import InputGroup from './InputGroup.vue'
 import FormCard from './FormCard.vue'
 import { RouterLink } from 'vue-router'
 
-const props = defineProps(['handleSubmit', 'errorMessage'])
+const props = defineProps(['handleSubmit', 'errorMessage', 'isLoading'])
 </script>
 
 <script></script>
@@ -15,6 +15,7 @@ const props = defineProps(['handleSubmit', 'errorMessage'])
     action="Login"
     :handleSubmit
     :errorMessage
+    :isLoading
     @dismissAlert="$emit('dismissAlert')"
   >
     <template #form>
@@ -32,5 +33,3 @@ const props = defineProps(['handleSubmit', 'errorMessage'])
     </template>
   </FormCard>
 </template>
-
-
