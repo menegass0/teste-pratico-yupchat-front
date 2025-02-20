@@ -25,12 +25,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 [http://locahost:5173](http://locahost:5173)<br>
 **Built With**<br>
 Vue.js<br>
-Authors<br>
+**Authors**<br>
 Victor Henrique Menegasso - Initial work - Menegasso<br>
 
 
-
-
-
-
-O conteúdo gerado por IA pode estar incorreto
