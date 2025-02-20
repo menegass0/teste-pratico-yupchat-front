@@ -1,45 +1,35 @@
-# front
+# YupChat Teste Prático Front-end
 
-This template should help get you started developing with Vue 3 in Vite.
+## Getting Started
 
-## Recommended IDE Setup
+Follow these instructions to get a copy of the project up and running on your local machine.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+### Prerequisites
 
-## Type Support for `.vue` Imports in TS
+- Node.js
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### Installation
 
-## Customize configuration
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/menegass0/teste-pratico-yupchat-front.git
+   cd teste-pratico-yupchat-front
+2. **Install the node_modules:**
+   ```bash
+   npm install
+3.  **Copy the .env.example file and set up your environment**:
+    ```bash
+    npm run dev
+    ```
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+Built With
+Vue.js
+Authors
+Victor Henrique Menegasso - Initial work - Menegasso
 
-## Project Setup
 
-```sh
-npm install
-```
 
-### Compile and Hot-Reload for Development
 
-```sh
-npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
 
-```sh
-npm run build
-```
-
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
-```sh
-npm run test:unit
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+O conteúdo gerado por IA pode estar incorreto
