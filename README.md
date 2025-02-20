@@ -21,12 +21,12 @@ Follow these instructions to get a copy of the project up and running on your lo
     ```bash
     npm run dev
     ```
-By Default your aplication must be running on:
-[a link](http://locahost:5173)
-**Built With**
-Vue.js
-Authors
-Victor Henrique Menegasso - Initial work - Menegasso
+**By Default your aplication must be running on:**<br>
+[http://locahost:5173](http://locahost:5173)<br>
+**Built With**<br>
+Vue.js<br>
+Authors<br>
+Victor Henrique Menegasso - Initial work - Menegasso<br>
 
 
 
