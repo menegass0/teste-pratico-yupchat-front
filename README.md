@@ -17,15 +17,14 @@ Follow these instructions to get a copy of the project up and running on your lo
 2. **Install the node_modules:**
    ```bash
    npm install
-3.  **Copy the .env.example file and set up your environment**:
+3.  **Run the App Locally with:**
     ```bash
     npm run dev
     ```
-**By Default your aplication must be running on:**<br>
-   -[http://localhost:5173](http://localhost:5173)<br>
+    Visit http://localhost:5173 in your browser to see the application in action.<br><br><br>
 **Built With**<br>
-   -Vue.js<br>
+    <br>Vue.js<br>
 **Authors**<br>
-   -Victor Henrique Menegasso - Initial work - Menegasso<br>
+    <br>Victor Henrique Menegasso - Initial work - Menegasso<br>
 
 
