@@ -37,7 +37,6 @@ const actions = {
         .then((data) => {
           if (data.success) {
             commit('SET_TASKS', data.data)
-            console.log(data.data)
             resolve()
           } else {
             reject(new Error(data.message))
@@ -115,7 +114,6 @@ const actions = {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log('res', data.data[0])
           if (data.success) {
             commit('UPDATE_TASK', data.data[0])
             resolve()

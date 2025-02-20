@@ -2,7 +2,7 @@
 import { defineProps, ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
-import { isEqual } from 'lodash';
+import { isEqual } from 'lodash'
 
 const store = useStore()
 
@@ -32,7 +32,7 @@ const formData = reactive({
   status: props.status,
 })
 
-const originalValues = JSON.stringify({ ...formData });
+const originalValues = JSON.stringify({ ...formData })
 
 const formInvalid = ref({
   title: false,
@@ -53,7 +53,7 @@ const updateTask = () => {
   }
 
   if (originalValues === JSON.stringify(formData)) {
-    return;
+    return
   }
 
   isLoading.value = true

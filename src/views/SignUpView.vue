@@ -21,7 +21,6 @@ const handleSubmit = async (event) => {
     .then((response) => response.json())
     .then((data) => {
       if (data.success) {
-        console.log(data.message)
         router.push('/login')
       } else {
         isLoading.value = false
