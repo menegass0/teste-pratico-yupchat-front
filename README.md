@@ -23,8 +23,8 @@ Follow these instructions to get a copy of the project up and running on your lo
     ```
     Visit http://localhost:5173 in your browser to see the application in action.<br><br><br>
 **Built With**<br>
-    <br>Vue.js<br>
+    <br>Vue.js<br><br>
 **Authors**<br>
-    <br>Victor Henrique Menegasso - Initial work - Menegasso<br>
+    <br>Victor Henrique Menegasso - Initial work - Menegasso<br><br>
 
 
